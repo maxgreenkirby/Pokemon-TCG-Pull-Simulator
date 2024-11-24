@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "TCG.sln"
+    "dotnet.defaultSolution": "Unity-TCG.sln"
 }
