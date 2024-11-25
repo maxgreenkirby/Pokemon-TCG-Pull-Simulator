@@ -509,8 +509,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _packOrigin: {fileID: 1600460446}
-  _packPrefab: {fileID: 309742451455418578, guid: 7b3d20877fa49c3478b15d50c53365bb, type: 3}
-  _sensitivity: 150
+  _packPrefab: {fileID: 3947186512472773471, guid: 17973ebbaa7cae2449f009456c2f49f7, type: 3}
+  _sensitivity: 400
 --- !u!4 &765530713
 Transform:
   m_ObjectHideFlags: 0
@@ -564,7 +564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &791560654
 RectTransform:
   m_ObjectHideFlags: 0

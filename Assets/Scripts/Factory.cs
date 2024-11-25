@@ -4,7 +4,7 @@ using PrimeTween;
 public class Factory : MonoBehaviour
 {
     [Header("Setup"), SerializeField] private Transform _packOrigin;
-    [SerializeField] private GameObject _packPrefab;
+    [SerializeField] private Pack _packPrefab;
     private int _packCount = 10;
     private float _packRadius = 2.2f;
 
@@ -45,7 +45,8 @@ public class Factory : MonoBehaviour
             float angle = i * Mathf.PI * 2 / _packCount;
             Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * _packRadius;
             Quaternion rot = Quaternion.LookRotation(-pos);
-            Instantiate(_packPrefab, pos, rot, _packOrigin);
+            Pack pack = Instantiate(_packPrefab, pos, rot, _packOrigin);
+            pack.Float(i * 0.15f);
         }
 
         AlignPacks();
