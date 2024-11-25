@@ -1,7 +1,9 @@
 using UnityEngine;
 using PrimeTween;
+using UniRx;
+using System.Collections.Generic;
 
-public class Factory : MonoBehaviour
+public class PullSimulator : MonoBehaviour
 {
     [Header("Setup"), SerializeField] private Transform _packOrigin;
     [SerializeField] private Pack _packPrefab;
@@ -12,6 +14,13 @@ public class Factory : MonoBehaviour
     private float _yaw;
     private Tween _alignTween;
 
+    [Header("Pull"), SerializeField] private List<Pack> _packs = new List<Pack>();
+
+    private void Awake()
+    {
+        MainEventHandler.ListenForEventStream<PackChooseEvent>().Subscribe(OnPackChooseEvent).AddTo(this);
+    }
+
     void Start()
     {
         SpawnPacks();  
@@ -19,6 +28,48 @@ public class Factory : MonoBehaviour
 
     private void Update()
     {
+        if (_packs.Count > 0)
+        {
+            RotatePacks();
+        }
+    }
+
+    private void OnPackChooseEvent(PackChooseEvent packOpenEvent)
+    {
+        // Destroy all packs except the selected pack
+        foreach (Pack pack in _packs)
+        {
+            if (pack != packOpenEvent.Pack)
+            {
+                Destroy(pack.gameObject);
+            }
+        }
+        
+        _packs.Clear();
+    }
+
+    private void SpawnPacks()
+    {
+        for (int i = 0; i < _packCount; i++)
+        {
+            // Spawn packs in a circle around the origin
+            float angle = i * Mathf.PI * 2 / _packCount;
+            Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * _packRadius;
+            Quaternion rot = Quaternion.LookRotation(-pos);
+            Pack pack = Instantiate(_packPrefab, pos, rot, _packOrigin);
+
+            // Simulate float animation with offset
+            pack.Float(i * 0.15f);
+
+            // Keep reference 
+            _packs.Add(pack);
+        }
+
+        AlignPacks();
+    }
+
+    private void RotatePacks()
+    {   
         // TODO: Convert all logic to use InputActions
         if (Input.GetMouseButton(0))
         {
@@ -35,21 +86,6 @@ public class Factory : MonoBehaviour
         {
             AlignPacks();
         }
-    }
-
-    private void SpawnPacks()
-    {
-        // Spawn packs in a circle around the origin
-        for (int i = 0; i < _packCount; i++)
-        {
-            float angle = i * Mathf.PI * 2 / _packCount;
-            Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * _packRadius;
-            Quaternion rot = Quaternion.LookRotation(-pos);
-            Pack pack = Instantiate(_packPrefab, pos, rot, _packOrigin);
-            pack.Float(i * 0.15f);
-        }
-
-        AlignPacks();
     }
 
     private void AlignPacks()

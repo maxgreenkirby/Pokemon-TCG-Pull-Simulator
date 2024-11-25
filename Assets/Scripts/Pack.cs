@@ -1,24 +1,30 @@
 using UnityEngine;
 using PrimeTween;
-using UnityEngine.EventSystems;
 
-public class Pack : MonoBehaviour, IPointerClickHandler
+public class Pack : MonoBehaviour
 {
+    private Sequence _floatSequence;
+
     public void Float(float startDelay = 0)
     {
-        Tween.PositionY(transform, -0.05f, 2f, Ease.InOutCubic, startDelay: startDelay)
+        _floatSequence = Tween.PositionY(transform, -0.05f, 2f, Ease.InOutCubic, startDelay: startDelay)
             .Chain(Tween.PositionY(transform, 0.05f, 2f, Ease.InOutCubic))
             .OnComplete(() => Float());
     }
 
     private void SelectPack()
     {
-
+        Debug.Log("Pack selected");
+        MainEventHandler.AddToEventStream(new PackChooseEvent(pack: this));
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnMouseDown()
     {
         SelectPack();
-        // MainEventHandler.AddToEventStream<PackOpenEvent>(new PackOpenEvent());
+    }
+
+    private void OnDestroy()
+    {
+        _floatSequence.Stop();
     }
 }

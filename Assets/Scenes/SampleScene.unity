@@ -505,12 +505,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 765530711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64027f0f9ff885047859e4766927e7f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ee9b9894de1a6d4bb80a37dd1e244a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _packOrigin: {fileID: 1600460446}
-  _packPrefab: {fileID: 3947186512472773471, guid: 17973ebbaa7cae2449f009456c2f49f7, type: 3}
+  _packPrefab: {fileID: 3642255613636565952, guid: 17973ebbaa7cae2449f009456c2f49f7, type: 3}
   _sensitivity: 400
+  _packs: []
 --- !u!4 &765530713
 Transform:
   m_ObjectHideFlags: 0
