@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class PullSimulator : MonoBehaviour
 {
-    [Header("Setup"), SerializeField] private Transform _packOrigin;
+    [Header("Setup"), SerializeField] private Database _database;
+    [SerializeField] private Transform _packOrigin;
     [SerializeField] private Pack _packPrefab;
     private int _packCount = 10;
     private float _packRadius = 2.2f;
@@ -14,12 +15,16 @@ public class PullSimulator : MonoBehaviour
     private float _yaw;
     private Tween _alignTween;
 
-    [Header("Pull"), SerializeField] private List<Pack> _packs = new List<Pack>();
+    [Header("Pull")] 
+    [SerializeField] private WorldCard _cardPrefab;
+    private List<Pack> _packs = new List<Pack>();
+    [SerializeField] private List<Card> _cards = new List<Card>();
     private Pack _closestPack;
 
     private void Awake()
     {
         MainEventHandler.ListenForEventStream<PackChooseEvent>().Subscribe(OnPackChooseEvent).AddTo(this);
+        MainEventHandler.ListenForEventStream<PackOpenEvent>().Subscribe(OnPackOpenEvent).AddTo(this);
     }
 
     void Start()
@@ -59,8 +64,19 @@ public class PullSimulator : MonoBehaviour
         Tween.Position(Camera.main.transform, new Vector3(0, 0.5f, -3.25f), 1f, Ease.OutQuint);
     }
 
+    private void OnPackOpenEvent(PackOpenEvent packOpenEvent)
+    {
+        // Open pack and show cards
+        foreach (Card card in _cards)
+        {
+            Debug.Log(card.Name);
+        }
+    }
+
     private void SpawnPacks()
     {
+        _cards = DrawCards();
+
         for (int i = 0; i < _packCount; i++)
         {
             // Spawn packs in a circle around the origin
@@ -139,5 +155,38 @@ public class PullSimulator : MonoBehaviour
         _closestPack = closestPack;
 
         Debug.Log("Closest pack: " + _closestPack.name);
+    }
+
+    private List<Card> DrawCards()
+    {
+        List<Card> cards = new List<Card>();
+        float randomChance;
+        ERarity rarity;
+
+        for (int i = 0; i < 5; i++)
+        {
+            randomChance = Random.Range(0f, 1f);
+
+            if (randomChance < 0.005f)
+            {
+                rarity = ERarity.CrownRare;
+            }
+            else if (randomChance < 0.01f + (i * 0.005)) // 3% on last pull
+            {
+                rarity = ERarity.UltraRare;
+            }
+            else if (randomChance < 0.05f + (i * 0.04)) // 25% on last pull
+            {
+                rarity = ERarity.Rare;
+            }
+            else
+            {
+                rarity = ERarity.Common;
+            }
+
+            cards.Add(_database.GetCard(rarity));
+        }
+
+        return cards;
     }
 }

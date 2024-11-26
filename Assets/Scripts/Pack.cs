@@ -6,22 +6,14 @@ public class Pack : MonoBehaviour
     private Sequence _floatSequence;
     private Vector3 _mouseDownPos;
 
-    public void Float(float startDelay = 0)
-    {
-        _floatSequence = Tween.PositionY(transform, -0.05f, 2f, Ease.InOutCubic, startDelay: startDelay)
-            .Chain(Tween.PositionY(transform, 0.05f, 2f, Ease.InOutCubic))
-            .OnComplete(() => Float());
-    }
-
-    public void StopFloating()
-    {
-        _floatSequence.Stop();
-    }
-
     private void SelectPack()
     {
-        Debug.Log("Pack selected");
         MainEventHandler.AddToEventStream(new PackChooseEvent(pack: this));
+    }
+
+    private void OpenPack()
+    {
+        MainEventHandler.AddToEventStream(new PackOpenEvent(pack: this));
     }
 
     public void OnMouseDown()
@@ -36,6 +28,18 @@ public class Pack : MonoBehaviour
         {
             SelectPack();
         }
+    }
+
+    public void Float(float startDelay = 0)
+    {
+        _floatSequence = Tween.PositionY(transform, -0.05f, 2f, Ease.InOutCubic, startDelay: startDelay)
+            .Chain(Tween.PositionY(transform, 0.05f, 2f, Ease.InOutCubic))
+            .OnComplete(() => Float());
+    }
+
+    public void StopFloating()
+    {
+        _floatSequence.Stop();
     }
 
     private void OnDestroy()
