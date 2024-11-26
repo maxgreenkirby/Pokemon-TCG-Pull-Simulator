@@ -219,6 +219,56 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &121450587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121450588}
+  - component: {fileID: 121450589}
+  m_Layer: 0
+  m_Name: Database
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &121450588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121450587}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &121450589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121450587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b96bc1814f21b54282bf85a6909c2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _database: {fileID: 11400000, guid: 23e70040f6a0adc4e8c92b95ec0dc057, type: 2}
+  _cards:
+  - {fileID: 11400000, guid: 268aaf10acab2f24db47ab0e01cc1566, type: 2}
+  - {fileID: 11400000, guid: dfb571fa07d891641bf591319e804de7, type: 2}
+  - {fileID: 11400000, guid: 1f50727750898cd418796cdf18bef667, type: 2}
+  - {fileID: 11400000, guid: 8bcb0d25f02d72e4cad8f00e9d009b57, type: 2}
 --- !u!1001 &184675962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -566,7 +616,7 @@ GameObject:
   - component: {fileID: 765530712}
   - component: {fileID: 765530714}
   m_Layer: 0
-  m_Name: Factory
+  m_Name: PullSimulator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -584,10 +634,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee9b9894de1a6d4bb80a37dd1e244a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _database: {fileID: 11400000, guid: 23e70040f6a0adc4e8c92b95ec0dc057, type: 2}
   _packOrigin: {fileID: 1600460446}
   _packPrefab: {fileID: 3642255613636565952, guid: 17973ebbaa7cae2449f009456c2f49f7, type: 3}
   _sensitivity: 400
-  _packs: []
+  _cardPrefab: {fileID: 0}
+  _cards: []
 --- !u!4 &765530713
 Transform:
   m_ObjectHideFlags: 0
@@ -943,10 +995,11 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 765530713}
   - {fileID: 1600460446}
   - {fileID: 41375776}
   - {fileID: 1862984979}
   - {fileID: 2103847247}
   - {fileID: 1710125271}
   - {fileID: 184675962}
+  - {fileID: 765530713}
+  - {fileID: 121450588}
