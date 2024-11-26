@@ -15,6 +15,7 @@ public class PullSimulator : MonoBehaviour
     private Tween _alignTween;
 
     [Header("Pull"), SerializeField] private List<Pack> _packs = new List<Pack>();
+    private Pack _closestPack;
 
     private void Awake()
     {
@@ -36,16 +37,26 @@ public class PullSimulator : MonoBehaviour
 
     private void OnPackChooseEvent(PackChooseEvent packOpenEvent)
     {
+        Pack chosenPack = packOpenEvent.Pack;
+
+        if (chosenPack != _closestPack) return;
+
         // Destroy all packs except the selected pack
         foreach (Pack pack in _packs)
         {
-            if (pack != packOpenEvent.Pack)
+            if (pack != chosenPack)
             {
                 Destroy(pack.gameObject);
             }
         }
         
         _packs.Clear();
+
+        chosenPack.StopFloating();
+        Tween.Position(chosenPack.transform, new Vector3(0, 0, -2.25f), 0.25f, Ease.OutQuint);
+        Tween.Rotation(chosenPack.transform, Quaternion.identity, 0.25f, Ease.OutQuint);
+
+        Tween.Position(Camera.main.transform, new Vector3(0, 0.5f, -3.25f), 1f, Ease.OutQuint);
     }
 
     private void SpawnPacks()
@@ -108,5 +119,25 @@ public class PullSimulator : MonoBehaviour
 
         float transitionTime = 0.75f;
         _alignTween = Tween.Rotation(_packOrigin, Quaternion.Euler(0, eulerAngleY, 0), transitionTime, Ease.OutCirc);
+
+        FindClosestPack();
+    }
+
+    private void FindClosestPack()
+    {
+        Pack closestPack = null;
+        
+        // Find the closest pack to the camera
+        foreach (Pack pack in _packs)
+        {
+            if (closestPack == null || Vector3.Distance(pack.transform.position, Camera.main.transform.position) < Vector3.Distance(closestPack.transform.position, Camera.main.transform.position))
+            {
+                closestPack = pack;
+            }
+        }
+
+        _closestPack = closestPack;
+
+        Debug.Log("Closest pack: " + _closestPack.name);
     }
 }
