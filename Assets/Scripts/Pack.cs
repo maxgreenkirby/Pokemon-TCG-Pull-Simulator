@@ -9,6 +9,9 @@ public class Pack : MonoBehaviour
     private void SelectPack()
     {
         MainEventHandler.AddToEventStream(new PackChooseEvent(pack: this));
+
+        // Temp
+        OpenPack();
     }
 
     private void OpenPack()

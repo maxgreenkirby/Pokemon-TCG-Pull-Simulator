@@ -69,7 +69,8 @@ public class PullSimulator : MonoBehaviour
         // Open pack and show cards
         foreach (Card card in _cards)
         {
-            Debug.Log(card.Name);
+            WorldCard worldCard = Instantiate(_cardPrefab, packOpenEvent.Pack.transform);
+            worldCard.Initialize(card);
         }
     }
 
@@ -171,11 +172,11 @@ public class PullSimulator : MonoBehaviour
             {
                 rarity = ERarity.CrownRare;
             }
-            else if (randomChance < 0.01f + (i * 0.005)) // 3% on last pull
+            else if (randomChance < 0.3f) // 0.01f + (i * 0.005)) // 3% on last pull
             {
                 rarity = ERarity.UltraRare;
             }
-            else if (randomChance < 0.05f + (i * 0.04)) // 25% on last pull
+            else if (randomChance < 0.2f + (i * 0.04)) 
             {
                 rarity = ERarity.Rare;
             }

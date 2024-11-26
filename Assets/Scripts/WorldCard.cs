@@ -4,7 +4,7 @@ public class WorldCard : MonoBehaviour
 {
     private Card _card;
     [SerializeField] private MeshRenderer _meshRenderer;
-    private Material[] _rarityMaterials;
+    [SerializeField] private Material[] _rarityMaterials;
 
     public void Initialize(Card card)
     {
