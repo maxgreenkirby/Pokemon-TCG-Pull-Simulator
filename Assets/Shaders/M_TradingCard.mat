@@ -66,19 +66,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FoilPattern_01:
-        m_Texture: {fileID: 2800000, guid: 4691c9520be0fdb4186f7ea0af8a56a2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0652e5c68d27e7b479a1fd3189c0d0af, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FoilPattern_02:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: dd66a8e248a804744aaca8945a12e670, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FoilPattern_03:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 521fccc1714e07b4687439ee1e4ca012, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Image:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2d258ea95e8cdb844bb550b9e8a32834, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -153,7 +153,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PatternTiling: {r: 0, g: 0, b: 0, a: 0}
+    - _PatternTiling: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
