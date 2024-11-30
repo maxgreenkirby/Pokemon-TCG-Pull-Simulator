@@ -20,6 +20,7 @@ public class PullSimulator : MonoBehaviour
     private List<Pack> _packs = new List<Pack>();
     [SerializeField] private List<Card> _cards = new List<Card>();
     private Pack _closestPack;
+    private Pack _chosenPack;
 
     private void Awake()
     {
@@ -38,29 +39,23 @@ public class PullSimulator : MonoBehaviour
         {
             RotatePacks();
         }
+
+        // Temp logic for pack opening
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OpenPack();
+        }
     }
 
     private void OnPackChooseEvent(PackChooseEvent packOpenEvent)
     {
-        Pack chosenPack = packOpenEvent.Pack;
+        _chosenPack = packOpenEvent.Pack;
 
-        if (chosenPack != _closestPack) return;
-
-        // Destroy all packs except the selected pack
-        foreach (Pack pack in _packs)
-        {
-            if (pack != chosenPack)
-            {
-                Destroy(pack.gameObject);
-            }
-        }
-        
+        if (_chosenPack != _closestPack) return;
         _packs.Clear();
 
-        chosenPack.StopFloating();
-        Tween.Position(chosenPack.transform, new Vector3(0, 0, -2.25f), 0.25f, Ease.OutQuint);
-        Tween.Rotation(chosenPack.transform, Quaternion.identity, 0.25f, Ease.OutQuint);
-
+        Tween.Position(_chosenPack.transform, new Vector3(0, 0, -2.25f), 0.25f, Ease.OutQuint);
+        Tween.Rotation(_chosenPack.transform, Quaternion.identity, 0.25f, Ease.OutQuint);
         Tween.Position(Camera.main.transform, new Vector3(0, 0.5f, -3.25f), 1f, Ease.OutQuint);
     }
 
@@ -189,5 +184,12 @@ public class PullSimulator : MonoBehaviour
         }
 
         return cards;
+    }
+
+    private void OpenPack()
+    {
+        if (_chosenPack == null) return;
+
+        _chosenPack.OpenPack();
     }
 }
