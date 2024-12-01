@@ -11,7 +11,9 @@ public class PullSimulator : MonoBehaviour
     private int _packCount = 10;
     private float _packRadius = 2.2f;
 
-    [Header("Controls"), SerializeField] private float _sensitivity = 150f;
+    [Header("Controls"), SerializeField] private float _sensitivity = 15f;
+    private Vector3 _initialMousePosition;
+    private bool _isDragging = false;
     private float _yaw;
     private Tween _alignTween;
 
@@ -92,21 +94,31 @@ public class PullSimulator : MonoBehaviour
     }
 
     private void RotatePacks()
-    {   
-        // TODO: Convert all logic to use InputActions
-        if (Input.GetMouseButton(0))
+    {
+        if (Input.GetMouseButtonDown(0))
         {
-            _yaw += Input.GetAxis("Mouse X") * _sensitivity * Time.deltaTime;
-            _packOrigin.rotation = Quaternion.Euler(0, -_yaw, 0);
+            _initialMousePosition = Input.mousePosition;
+            _isDragging = true;
 
+            // Stop the alignment tween if it's active
             if (_alignTween.isAlive)
             {
                 _alignTween.Stop();
             }
         }
 
+        if (Input.GetMouseButton(0) && _isDragging)
+        {
+            Vector3 scrollDirection = (Input.mousePosition - _initialMousePosition).normalized;
+            _yaw += scrollDirection.x * _sensitivity * Time.deltaTime;
+            _packOrigin.rotation = Quaternion.Euler(0, -_yaw, 0);
+
+            _initialMousePosition = Input.mousePosition;
+        }
+
         if (Input.GetMouseButtonUp(0))
         {
+            _isDragging = false;
             AlignPacks();
         }
     }

@@ -5,9 +5,9 @@ using UniRx;
 public class Pack : MonoBehaviour
 {
     [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField] private Material _tearMaterial;
     private Sequence _floatSequence;
     private Vector3 _mouseDownPos;
-    private Material _tearMaterial;
 
     private void Awake()
     {
@@ -28,7 +28,10 @@ public class Pack : MonoBehaviour
     private void SelectPack()
     {
         MainEventHandler.AddToEventStream(new PackChooseEvent(pack: this));
-        _meshRenderer.materials[1] = _tearMaterial;
+
+        Material[] materials = _meshRenderer.materials;
+        materials[1] = _tearMaterial;
+        _meshRenderer.materials = materials;
     }
 
     public void OpenPack()
