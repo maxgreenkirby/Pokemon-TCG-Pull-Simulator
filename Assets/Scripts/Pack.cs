@@ -16,17 +16,17 @@ public class Pack : MonoBehaviour
 
     private void Awake()
     {
-        MainEventHandler.ListenForEventStream<PackChooseEvent>().Subscribe(OnPackChooseEvent).AddTo(this);
+        MainEventHandler.ListenForEventStream<PackSelectEvent>().Subscribe(OnPackChooseEvent).AddTo(this);
     }
 
-    private void OnPackChooseEvent(PackChooseEvent packOpenEvent)
+    private void OnPackChooseEvent(PackSelectEvent packOpenEvent)
     {
         _floatSequence.Stop();
     }
     
     private void SelectPack()
     {
-        MainEventHandler.AddToEventStream(new PackChooseEvent(pack: this));
+        MainEventHandler.AddToEventStream(new PackSelectEvent(pack: this));
     }
 
     public void SetTearMaterial()

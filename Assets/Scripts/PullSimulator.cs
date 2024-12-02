@@ -3,14 +3,24 @@ using PrimeTween;
 using UniRx;
 using System.Collections.Generic;
 
+public enum EState
+{
+    Menu,
+    PackSelect,
+    PackOpen,
+    CardReveal,
+}
+
 public class PullSimulator : MonoBehaviour
 {
     [Header("Setup")]
     [SerializeField] private Database _database;
+    [SerializeField] private EState _state;
     [SerializeField] private Transform _packOrigin;
     [SerializeField] private Pack _packPrefab;
     private int _packCount = 10;
     private float _packRadius = 2.2f;
+    private Vector3 _originalCameraPosition;
 
     [Header("Controls")]
     private float _sensitivity = 10f;
@@ -23,40 +33,53 @@ public class PullSimulator : MonoBehaviour
     [SerializeField] private WorldCard _cardPrefab;
     private List<Pack> _packs = new List<Pack>();
     [SerializeField] private List<Card> _cards = new List<Card>();
+    private int _cardCount = 5;
     private Pack _closestPack;
     private Pack _chosenPack;
 
     private void Awake()
     {
-        MainEventHandler.ListenForEventStream<PackChooseEvent>().Subscribe(OnPackChooseEvent).AddTo(this);
+        MainEventHandler.ListenForEventStream<PackSelectEvent>().Subscribe(OnPackChooseEvent).AddTo(this);
         MainEventHandler.ListenForEventStream<PackOpenEvent>().Subscribe(OnPackOpenEvent).AddTo(this);
+        MainEventHandler.ListenForEventStream<CardSelectEvent>().Subscribe(OnCardSelectEvent).AddTo(this);
     }
 
-    void Start()
+    private void Start()
     {
-        SpawnPacks();  
+        _originalCameraPosition = Camera.main.transform.position;
+        SwitchState(EState.Menu);
     }
 
     private void Update()
     {
-        if (_packs.Count > 0)
+        if (_state == EState.PackSelect)
         {
             RotatePacks();
         }
 
         // Temp logic for pack opening
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (_state == EState.PackOpen && Input.GetKeyDown(KeyCode.Space))
         {
-            _chosenPack?.OpenPack();
+            _state = EState.CardReveal;
         }
     }
 
-    private void OnPackChooseEvent(PackChooseEvent packOpenEvent)
+    private void SwitchState(EState state)
+    {
+        _state = state;
+
+        MainEventHandler.AddToEventStream(new StateChangeEvent(state));
+    }
+
+    private void OnPackChooseEvent(PackSelectEvent packOpenEvent)
     {
         _chosenPack = packOpenEvent.Pack;
         
         // Return if the chosen pack is not centered on screen
         if (_chosenPack != _closestPack) return;
+
+        SwitchState(EState.PackOpen);
+        _chosenPack.OpenPack();
 
         foreach (Pack pack in _packs)
         {
@@ -87,8 +110,26 @@ public class PullSimulator : MonoBehaviour
         }
     }
 
-    private void SpawnPacks()
+    private void OnCardSelectEvent(CardSelectEvent cardSelectEvent)
     {
+        WorldCard selectedCard = cardSelectEvent.Card;
+        Tween.LocalPositionY(selectedCard.transform, 2f, 0.5f, Ease.OutQuart);
+
+        _cardCount--;
+
+        if (_cardCount == 0)
+        {
+            SwitchState(EState.Menu);
+            _cardCount = 5;
+        }
+    }
+
+    public void SpawnPacks()
+    {
+        SwitchState(EState.PackSelect);
+
+        Camera.main.transform.position = _originalCameraPosition;
+
         _cards = DrawCards();
 
         for (int i = 0; i < _packCount; i++)
