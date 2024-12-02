@@ -13,7 +13,7 @@ public class PullSimulator : MonoBehaviour
     private float _packRadius = 2.2f;
 
     [Header("Controls")]
-    private float _sensitivity = 3f;
+    private float _sensitivity = 10f;
     private Vector3 _initialMousePosition;
     private bool _isDragging = false;
     private float _scroll;
@@ -47,16 +47,28 @@ public class PullSimulator : MonoBehaviour
         // Temp logic for pack opening
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            OpenPack();
+            _chosenPack?.OpenPack();
         }
     }
 
     private void OnPackChooseEvent(PackChooseEvent packOpenEvent)
     {
         _chosenPack = packOpenEvent.Pack;
-
+        
+        // Return if the chosen pack is not centered on screen
         if (_chosenPack != _closestPack) return;
+
+        foreach (Pack pack in _packs)
+        {
+            if (pack != _chosenPack)
+            {
+                Destroy(pack.gameObject);
+            }
+        }
+
         _packs.Clear();
+
+        _chosenPack.SetTearMaterial();
 
         Tween.Position(_chosenPack.transform, new Vector3(0, 0, -2.25f), 0.25f, Ease.OutQuint);
         Tween.Rotation(_chosenPack.transform, Quaternion.identity, 0.25f, Ease.OutQuint);
@@ -158,20 +170,18 @@ public class PullSimulator : MonoBehaviour
 
     private void FindClosestPack()
     {
-        Pack closestPack = null;
+        Pack closestPack = _packs[0];
         
         // Find the closest pack to the camera
         foreach (Pack pack in _packs)
         {
-            if (closestPack == null || Vector3.Distance(pack.transform.position, Camera.main.transform.position) < Vector3.Distance(closestPack.transform.position, Camera.main.transform.position))
+            if (Vector3.Distance(pack.transform.position, Camera.main.transform.position) < Vector3.Distance(closestPack.transform.position, Camera.main.transform.position))
             {
                 closestPack = pack;
             }
         }
 
         _closestPack = closestPack;
-
-        Debug.Log("Closest pack: " + _closestPack.name);
     }
 
     private List<Card> DrawCards()
@@ -205,12 +215,5 @@ public class PullSimulator : MonoBehaviour
         }
 
         return cards;
-    }
-
-    private void OpenPack()
-    {
-        if (_chosenPack == null) return;
-
-        _chosenPack.OpenPack();
     }
 }

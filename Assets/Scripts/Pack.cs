@@ -17,18 +17,15 @@ public class Pack : MonoBehaviour
     private void OnPackChooseEvent(PackChooseEvent packOpenEvent)
     {
         _floatSequence.Stop();
-
-        // Destroy if pack isn't the one selected
-        if (packOpenEvent.Pack != this)
-        {
-            Destroy(gameObject);
-        }
     }
     
     private void SelectPack()
     {
         MainEventHandler.AddToEventStream(new PackChooseEvent(pack: this));
+    }
 
+    public void SetTearMaterial()
+    {
         Material[] materials = _meshRenderer.materials;
         materials[1] = _tearMaterial;
         _meshRenderer.materials = materials;
@@ -38,7 +35,7 @@ public class Pack : MonoBehaviour
     {
         MainEventHandler.AddToEventStream(new PackOpenEvent(pack: this));
 
-        Tween.PositionY(transform, -300f, 1f, Ease.OutBack).OnComplete(() => { Destroy(gameObject); });
+        Tween.PositionY(transform, -300f, 1f, Ease.OutBack);  //.OnComplete(() => { Destroy(gameObject); });
     }
 
     public void OnMouseDown()
