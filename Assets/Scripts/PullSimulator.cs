@@ -256,16 +256,12 @@ public class PullSimulator : MonoBehaviour
             Card card = _database.GetCard(rarity);
 
             // Duplicate check
-            foreach (Card c in cards)
+            while (cards.Contains(card))
             {
-                if (c.ID == card.ID)
-                {
-                    i--;
-                    continue;
-                }
+                card = _database.GetCard(rarity);
             }
 
-            cards.Add(_database.GetCard(rarity));
+            cards.Add(card);
         }
 
         return cards;
