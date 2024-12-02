@@ -93,7 +93,6 @@ public class PullSimulator : MonoBehaviour
         _chosenPack.SetTearMaterial();
 
         Tween.Position(_chosenPack.transform, new Vector3(0, 0, -2.25f), 0.25f, Ease.OutQuint);
-        Tween.Rotation(_chosenPack.transform, Quaternion.identity, 0.25f, Ease.OutQuint);
         Tween.Position(Camera.main.transform, new Vector3(0, 0.5f, -3.25f), 1f, Ease.OutQuint);
     }
 
@@ -137,7 +136,7 @@ public class PullSimulator : MonoBehaviour
             // Spawn packs in a circle around the origin
             float angle = i * Mathf.PI * 2 / _packCount;
             Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * _packRadius;
-            Quaternion rot = Quaternion.LookRotation(-pos);
+            Quaternion rot = Quaternion.LookRotation(pos);
             Pack pack = Instantiate(_packPrefab, pos, rot, _packOrigin);
 
             // Simulate float animation with offset
