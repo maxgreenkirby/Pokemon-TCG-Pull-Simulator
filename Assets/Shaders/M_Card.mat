@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4130795311316272794
+--- !u!114 &-4673588907895365878
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,13 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_TearIndicator
-  m_Shader: {fileID: -6465566751694194690, guid: 1b1ff4d5c5ae20943a1ab3a1ad333e20, type: 3}
+  m_Name: M_Card
+  m_Shader: {fileID: -6465566751694194690, guid: 66b539efae51af447bfa707089e4e0d6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -37,16 +37,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Background:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BackgroundTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture2DAsset_48727df02edd4b31ab659b8fc3b1d1ac_Out_0_Texture2D:
-        m_Texture: {fileID: 2800000, guid: dd66a8e248a804744aaca8945a12e670, type: 3}
+    - _Image:
+        m_Texture: {fileID: 2800000, guid: 39afd5b55f36a2c429263988a8da72d6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -63,17 +55,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Angle: 0
-    - _Delay: 0
-    - _Length: 0
-    - _Max: 0
-    - _Min: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 0
-    - _Thickness: 0
     m_Colors:
-    - _BackgroundColor: {r: 0.40566027, g: 0.94142675, b: 1, a: 0}
-    - _Color: {r: 95.87453, g: 95.87453, b: 95.87453, a: 1}
+    - _BackColor: {r: 0.47197485, g: 0.5639083, b: 0.95597476, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
