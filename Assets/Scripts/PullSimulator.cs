@@ -240,7 +240,7 @@ public class PullSimulator : MonoBehaviour
             {
                 rarity = ERarity.CrownRare;
             }
-            else if (randomChance < 0.3f) // 0.01f + (i * 0.005)) // 3% on last pull
+            else if (randomChance < 0.05f) // 0.01f + (i * 0.005)) // 3% on last pull
             {
                 rarity = ERarity.UltraRare;
             }
@@ -253,7 +253,15 @@ public class PullSimulator : MonoBehaviour
                 rarity = ERarity.Common;
             }
 
-            cards.Add(_database.GetCard(rarity));
+            Card card = _database.GetCard(rarity);
+
+            // Duplicate check
+            while (cards.Contains(card))
+            {
+                card = _database.GetCard(rarity);
+            }
+
+            cards.Add(card);
         }
 
         return cards;

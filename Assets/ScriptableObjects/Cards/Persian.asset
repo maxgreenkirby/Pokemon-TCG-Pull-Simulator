@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c798a33635e78147b81f8ff66856949, type: 3}
-  m_Name: Anthony
+  m_Name: Persian
   m_EditorClassIdentifier: 
-  ID: 0
-  Name: Anthony
+  ID: 9
+  Name: Vupix
   HP: 100
-  Rarity: 2
+  Rarity: 0
   CardType: 2
   EffectType: 0
-  Sprite: {fileID: 21300000, guid: 52664c1b0c13170448d6831c92a200e8, type: 3}
+  Sprite: {fileID: 21300000, guid: 3b33fcdf5c28f924da462c27459fb567, type: 3}
