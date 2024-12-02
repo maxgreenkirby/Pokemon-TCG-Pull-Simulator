@@ -17,6 +17,8 @@ public class Pack : MonoBehaviour
     private void Awake()
     {
         MainEventHandler.ListenForEventStream<PackSelectEvent>().Subscribe(OnPackChooseEvent).AddTo(this);
+        MainEventHandler.ListenForEventStream<StateChangeEvent>().Where(_ => _.State == EState.CardReveal).Subscribe(_ => RevealCards()).AddTo(this);
+        MainEventHandler.ListenForEventStream<StateChangeEvent>().Where(_ => _.State == EState.Menu).Subscribe(_ => CleanUp()).AddTo(this);
     }
 
     private void OnPackChooseEvent(PackSelectEvent packOpenEvent)
@@ -41,11 +43,11 @@ public class Pack : MonoBehaviour
         _cards.Add(card);
     }
 
-    public void OpenPack()
+    public void RevealCards()
     {
         MainEventHandler.AddToEventStream(new PackOpenEvent(pack: this));
 
-        Tween.LocalPositionY(transform, -1f, 1.75f, Ease.OutQuart);  //.OnComplete(() => { Destroy(gameObject); });
+        Tween.LocalPositionY(transform, -1f, 1.75f, Ease.OutQuart);
 
         // Animate the cards out of the pack
         for (int i = 0; i < _cards.Count; i++)
@@ -73,5 +75,17 @@ public class Pack : MonoBehaviour
         _floatSequence = Tween.PositionY(transform, -0.05f, 2f, Ease.InOutCubic, startDelay: startDelay)
             .Chain(Tween.PositionY(transform, 0.05f, 2f, Ease.InOutCubic))
             .OnComplete(() => Float());
+    }
+
+    private void CleanUp()
+    {
+        foreach (WorldCard card in _cards)
+        {
+            Destroy(card.gameObject);
+        }
+
+        _cards.Clear();
+
+        Destroy(gameObject);
     }
 }

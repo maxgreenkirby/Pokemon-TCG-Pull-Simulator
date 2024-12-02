@@ -60,7 +60,7 @@ public class PullSimulator : MonoBehaviour
         // Temp logic for pack opening
         if (_state == EState.PackOpen && Input.GetKeyDown(KeyCode.Space))
         {
-            _state = EState.CardReveal;
+            SwitchState(EState.CardReveal);
         }
     }
 
@@ -79,7 +79,6 @@ public class PullSimulator : MonoBehaviour
         if (_chosenPack != _closestPack) return;
 
         SwitchState(EState.PackOpen);
-        _chosenPack.OpenPack();
 
         foreach (Pack pack in _packs)
         {
@@ -103,7 +102,7 @@ public class PullSimulator : MonoBehaviour
         // Open pack and show cards
         for (int i = 0; i < _cards.Count; i++)
         {
-            float zOffset = i * _cardPrefab.transform.localScale.z;
+            float zOffset = i * 0.01f;
             WorldCard worldCard = Instantiate(_cardPrefab, new Vector3(0, -0.5f, -2.2f + zOffset), _cardPrefab.transform.rotation);
             worldCard.Initialize(_cards[i]);
             packOpenEvent.Pack.AddCard(worldCard);
@@ -128,6 +127,7 @@ public class PullSimulator : MonoBehaviour
     {
         SwitchState(EState.PackSelect);
 
+        _packOrigin.rotation = Quaternion.identity;
         Camera.main.transform.position = _originalCameraPosition;
 
         _cards = DrawCards();
