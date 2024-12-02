@@ -78,10 +78,12 @@ public class PullSimulator : MonoBehaviour
     private void OnPackOpenEvent(PackOpenEvent packOpenEvent)
     {
         // Open pack and show cards
-        foreach (Card card in _cards)
+        for (int i = 0; i < _cards.Count; i++)
         {
-            WorldCard worldCard = Instantiate(_cardPrefab, packOpenEvent.Pack.transform);
-            worldCard.Initialize(card);
+            float zOffset = i * _cardPrefab.transform.localScale.z;
+            WorldCard worldCard = Instantiate(_cardPrefab, new Vector3(0, -0.5f, -2.2f + zOffset), _cardPrefab.transform.rotation);
+            worldCard.Initialize(_cards[i]);
+            packOpenEvent.Pack.AddCard(worldCard);
         }
     }
 

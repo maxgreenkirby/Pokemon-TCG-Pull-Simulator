@@ -560,7 +560,6 @@ MonoBehaviour:
   _database: {fileID: 11400000, guid: 23e70040f6a0adc4e8c92b95ec0dc057, type: 2}
   _packOrigin: {fileID: 1600460446}
   _packPrefab: {fileID: 3642255613636565952, guid: 17973ebbaa7cae2449f009456c2f49f7, type: 3}
-  _sensitivity: 15
   _cardPrefab: {fileID: 5917789940976116870, guid: f12b1d8cf329e33439d0b0274f026afe, type: 3}
   _cards: []
 --- !u!4 &765530713
@@ -666,7 +665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2059325581603861337, guid: f12b1d8cf329e33439d0b0274f026afe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.1093955
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2059325581603861337, guid: f12b1d8cf329e33439d0b0274f026afe, type: 3}
       propertyPath: m_LocalRotation.w
