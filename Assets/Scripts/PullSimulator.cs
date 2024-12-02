@@ -5,16 +5,18 @@ using System.Collections.Generic;
 
 public class PullSimulator : MonoBehaviour
 {
-    [Header("Setup"), SerializeField] private Database _database;
+    [Header("Setup")]
+    [SerializeField] private Database _database;
     [SerializeField] private Transform _packOrigin;
     [SerializeField] private Pack _packPrefab;
     private int _packCount = 10;
     private float _packRadius = 2.2f;
 
-    [Header("Controls"), SerializeField] private float _sensitivity = 15f;
+    [Header("Controls")]
+    private float _sensitivity = 3f;
     private Vector3 _initialMousePosition;
     private bool _isDragging = false;
-    private float _yaw;
+    private float _scroll;
     private Tween _alignTween;
 
     [Header("Pull")] 
@@ -98,6 +100,7 @@ public class PullSimulator : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _initialMousePosition = Input.mousePosition;
+            _scroll = _packOrigin.eulerAngles.y;
             _isDragging = true;
 
             // Stop the alignment tween if it's active
@@ -107,18 +110,24 @@ public class PullSimulator : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(0) && _isDragging)
+        if (_isDragging)
         {
-            Vector3 scrollDirection = (Input.mousePosition - _initialMousePosition).normalized;
-            _yaw += scrollDirection.x * _sensitivity * Time.deltaTime;
-            _packOrigin.rotation = Quaternion.Euler(0, -_yaw, 0);
+            Vector3 scrollDirection = Input.mousePosition - _initialMousePosition;
 
-            _initialMousePosition = Input.mousePosition;
+            // Only rotate if mouse is moving enough
+            if (scrollDirection.magnitude > 1)
+            {
+                _scroll += -scrollDirection.x * _sensitivity * Time.deltaTime;
+                _packOrigin.rotation = Quaternion.Euler(0, _scroll, 0);
+
+                _initialMousePosition = Input.mousePosition;
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             _isDragging = false;
+
             AlignPacks();
         }
     }
