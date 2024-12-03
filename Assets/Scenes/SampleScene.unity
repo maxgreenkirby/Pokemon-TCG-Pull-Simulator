@@ -587,7 +587,7 @@ MonoBehaviour:
   _state: 1
   _packOrigin: {fileID: 1600460446}
   _packPrefab: {fileID: 3642255613636565952, guid: 17973ebbaa7cae2449f009456c2f49f7, type: 3}
-  _cardPrefab: {fileID: 5917789940976116870, guid: 8262d1b5359c4a040bf27b93d4e515d0, type: 3}
+  _cardPrefab: {fileID: 5917789940976116870, guid: f12b1d8cf329e33439d0b0274f026afe, type: 3}
   _cards: []
 --- !u!4 &765530713
 Transform:

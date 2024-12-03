@@ -226,6 +226,6 @@ MonoBehaviour:
   _meshRenderer: {fileID: 2103436844143646190}
   _rarityMaterials:
   - {fileID: 2100000, guid: f1f0e7dc8dd8b7b4fb49115db761f3fc, type: 2}
-  - {fileID: 2100000, guid: f1f0e7dc8dd8b7b4fb49115db761f3fc, type: 2}
   - {fileID: 2100000, guid: e7226441fcbeb3f439ae7bda1af60b3f, type: 2}
+  - {fileID: 2100000, guid: 5b12fb634d06db2449b97eed02c4c02e, type: 2}
   - {fileID: 2100000, guid: a61ea43682c324948861c3928ccd603c, type: 2}

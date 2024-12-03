@@ -25,11 +25,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _FoilMask:
-        m_Texture: {fileID: 2800000, guid: 071347b2208a2664ea5c62e109df2121, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0652e5c68d27e7b479a1fd3189c0d0af, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FoilPattern_01:
-        m_Texture: {fileID: 2800000, guid: 071347b2208a2664ea5c62e109df2121, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0652e5c68d27e7b479a1fd3189c0d0af, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Image:
@@ -37,7 +37,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ImageMask:
-        m_Texture: {fileID: 2800000, guid: d3a63659bb0a55f4cac79476d4290b5b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 402263469046c184d9e15700da162c67, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -59,7 +59,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 0.5686275, g: 0.9190909, b: 1, a: 0}
+    - _Color: {r: 0.5617854, g: 0.72327036, b: 0.6862244, a: 0}
     - _PatternTiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

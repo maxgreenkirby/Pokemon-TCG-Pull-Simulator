@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_CrownRare
+  m_Name: M_UltraRare
   m_Shader: {fileID: -6465566751694194690, guid: 56761a611171e48448b5929dccdc55b9, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -66,15 +66,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FoilPattern_01:
-        m_Texture: {fileID: 2800000, guid: f214113abee0b4948a1a9d7cfc06a757, type: 3}
+        m_Texture: {fileID: 2800000, guid: 85372aecf595d5c4e943b7edc3fe03d7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FoilPattern_02:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: dd66a8e248a804744aaca8945a12e670, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FoilPattern_03:
-        m_Texture: {fileID: 2800000, guid: eb4808d43eed652468627d7bb1eaefd4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 85372aecf595d5c4e943b7edc3fe03d7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Image:
