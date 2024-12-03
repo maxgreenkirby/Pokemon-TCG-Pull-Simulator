@@ -2,6 +2,7 @@ using UnityEngine;
 using PrimeTween;
 using UniRx;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
 
 public enum EState
 {
@@ -28,6 +29,7 @@ public class PullSimulator : MonoBehaviour
     private bool _isDragging = false;
     private float _scroll;
     private Tween _alignTween;
+    private Tween _resetPackTween;
 
     [Header("Pull")] 
     [SerializeField] private WorldCard _cardPrefab;
@@ -35,12 +37,16 @@ public class PullSimulator : MonoBehaviour
     [SerializeField] private List<Card> _cards = new List<Card>();
     private int _cardCount = 5;
     private Pack _closestPack;
+    private Pack _currentPack;
     private Pack _chosenPack;
 
     private void Awake()
     {
         MainEventHandler.ListenForEventStream<PackSelectEvent>().Subscribe(OnPackChooseEvent).AddTo(this);
         MainEventHandler.ListenForEventStream<PackOpenEvent>().Subscribe(OnPackOpenEvent).AddTo(this);
+
+        MainEventHandler.ListenForEventStream<PackDragEvent>().Subscribe(OnPackDragEvent).AddTo(this);
+
         MainEventHandler.ListenForEventStream<CardSelectEvent>().Subscribe(OnCardSelectEvent).AddTo(this);
     }
 
@@ -108,10 +114,31 @@ public class PullSimulator : MonoBehaviour
         }
     }
 
+    private void OnPackDragEvent(PackDragEvent packDragEvent)
+    {
+        Pack pack = packDragEvent.Pack;    
+
+        if (packDragEvent.IsDragging)
+        {
+            if (pack == _closestPack)
+            {
+                _currentPack = pack;
+            }
+        } 
+        else
+        {
+            AlignPack();
+        }
+    }
+
     private void OnCardSelectEvent(CardSelectEvent cardSelectEvent)
     {
         WorldCard selectedCard = cardSelectEvent.Card;
-        Tween.LocalPositionY(selectedCard.transform, 2f, 0.5f, Ease.OutQuart);
+
+        // Animate to the right
+        Tween.LocalPositionX(selectedCard.transform, 5f, 0.5f, Ease.OutQuart);
+        
+        // Tween.LocalPositionY(selectedCard.transform, 2f, 0.5f, Ease.OutQuart);
 
         _cardCount--;
 
@@ -146,15 +173,18 @@ public class PullSimulator : MonoBehaviour
             _packs.Add(pack);
         }
 
-        AlignPacks();
+        AlignPackOrigin();
     }
 
     private void RotatePacks()
     {
+        // Check if a specific pack is being rotated
+        Transform rotatePoint = _currentPack != null ? _currentPack.transform : _packOrigin;
+
         if (Input.GetMouseButtonDown(0))
         {
             _initialMousePosition = Input.mousePosition;
-            _scroll = _packOrigin.eulerAngles.y;
+            _scroll = rotatePoint.eulerAngles.y;
             _isDragging = true;
 
             // Stop the alignment tween if it's active
@@ -172,7 +202,7 @@ public class PullSimulator : MonoBehaviour
             if (scrollDirection.magnitude > 1)
             {
                 _scroll += -scrollDirection.x * _sensitivity * Time.deltaTime;
-                _packOrigin.rotation = Quaternion.Euler(0, _scroll, 0);
+                rotatePoint.rotation = Quaternion.Euler(0, _scroll, 0);
 
                 _initialMousePosition = Input.mousePosition;
             }
@@ -182,11 +212,11 @@ public class PullSimulator : MonoBehaviour
         {
             _isDragging = false;
 
-            AlignPacks();
+            AlignPackOrigin();
         }
     }
 
-    private void AlignPacks()
+    private void AlignPackOrigin()
     {
         // Align the packs to the nearest angle
         float angle = 360 / _packCount;
@@ -208,6 +238,19 @@ public class PullSimulator : MonoBehaviour
         _alignTween = Tween.Rotation(_packOrigin, Quaternion.Euler(0, eulerAngleY, 0), transitionTime, Ease.OutCirc);
 
         FindClosestPack();
+    }
+
+    private void AlignPack()
+    {
+        // Choose which way to rotate
+        // float eulerAngleY = _currentPack.transform.eulerAngles.y;
+        // float remainder = Mathf.Abs(eulerAngleY % 180);
+
+        // if (remainder > )
+
+        Tween.Rotation(_currentPack.transform, _packPrefab.transform.rotation, 0.75f, Ease.OutQuart).OnComplete(() => {
+            _currentPack = null;
+        });
     }
 
     private void FindClosestPack()
@@ -236,15 +279,15 @@ public class PullSimulator : MonoBehaviour
         {
             randomChance = Random.Range(0f, 1f);
 
-            if (randomChance < 0.005f)
+            if (randomChance < 0.1f)
             {
                 rarity = ERarity.CrownRare;
             }
-            else if (randomChance < 0.05f) // 0.01f + (i * 0.005)) // 3% on last pull
+            else if (randomChance < 0.2f) // 0.01f + (i * 0.005)) // 3% on last pull
             {
                 rarity = ERarity.UltraRare;
             }
-            else if (randomChance < 0.2f + (i * 0.04)) 
+            else if (randomChance < 0.3f + (i * 0.04)) 
             {
                 rarity = ERarity.Rare;
             }
@@ -254,13 +297,6 @@ public class PullSimulator : MonoBehaviour
             }
 
             Card card = _database.GetCard(rarity);
-
-            // Duplicate check
-            while (cards.Contains(card))
-            {
-                card = _database.GetCard(rarity);
-            }
-
             cards.Add(card);
         }
 

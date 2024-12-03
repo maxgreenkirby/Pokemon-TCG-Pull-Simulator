@@ -11,8 +11,14 @@ public class WorldCard : MonoBehaviour
     {
         _card = card;
 
+        Debug.Log((int)card.Rarity);
         _meshRenderer.material = _rarityMaterials[(int)card.Rarity];
         _meshRenderer.material.SetTexture("_Image", card.Sprite.texture);
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void OnMouseDown()

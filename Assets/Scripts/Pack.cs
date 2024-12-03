@@ -48,6 +48,7 @@ public class Pack : MonoBehaviour
         MainEventHandler.AddToEventStream(new PackOpenEvent(pack: this));
 
         Tween.LocalPositionY(transform, -1f, 1.75f, Ease.OutQuart);
+        Tween.LocalRotation(transform, Quaternion.identity, 0.75f, Ease.OutQuart);
 
         // Animate the cards out of the pack
         for (int i = 0; i < _cards.Count; i++)
@@ -59,6 +60,8 @@ public class Pack : MonoBehaviour
     public void OnMouseDown()
     {
         _mouseDownPos = Input.mousePosition;
+
+        MainEventHandler.AddToEventStream(new PackDragEvent(pack: this, isDragging : true));
     }
 
     public void OnMouseUp()
@@ -68,6 +71,8 @@ public class Pack : MonoBehaviour
         {
             SelectPack();
         }
+
+        MainEventHandler.AddToEventStream(new PackDragEvent(pack: this, isDragging : false));
     }
 
     public void Float(float startDelay = 0)
