@@ -1,0 +1,66 @@
+ID,Name,HP,Rarity,EffectType,Sprite Name
+1,Alisa Ho,100,UltraRare,Basic,Alisa_Sigma
+2,Andrew Katsu,100,CrownRare,Basic,Andrew
+3,Andrew Katsu,100,Common,Basic,Andrew_Forehead
+4,Andrew the Jean Wizard,100,Rare,Supporter,Andrew_JeanWizard
+5,Andrew Katsu,100,UltraRare,Basic,Andrew_Sigma
+6,Anthony Fedato,100,CrownRare,Basic,Anthony
+7,Anthony Fedato,100,Rare,Basic,Anthony_Pirate
+8,Anthony Fedato,100,UltraRare,Basic,Anthony_Sigma
+9,Armando,100,UltraRare,Basic,Armando_Sigma
+10,David Rueda,100,UltraRare,Basic,David_Sigma
+11,Denizhan Yağcı,100,UltraRare,Basic,Deniz_Sigma
+12,Dong Hee (Dom) Kim,100,CrownRare,Basic,Dom
+13,Dong Hee (Dom) Kim,100,UltraRare,Basic,Dom_Sigma
+14,Dong Hee (Dom) Kim,100,Common,Basic,Dom_Sleeping
+15,Farnoud Fathi,100,UltraRare,Basic,Farnoud_Sigma
+16,First Friday,100,Rare,Supporter,FirstFriday
+17,Francisco Guadarrama,100,UltraRare,Basic,Francisco_Sigma
+18,Gemkyle Endaya,100,UltraRare,Basic,Gem_Sigma
+19,Halloween,100,Rare,Supporter,Halloween_GroupPhoto
+20,Henry Williams,100,UltraRare,Basic,Henry_Sigma
+21,James Gumboc,100,UltraRare,Basic,James_Sigma
+22,Josh Miko Galbo,100,Common,Basic,Josh_Cheese
+23,Josh Miko Galbo,100,Common,Basic,Josh_GreenCard
+24,Josh Miko Galbo,100,Rare,Basic,Josh_Makeup
+25,Josh Miko Galbo,100,UltraRare,Basic,Josh_Sigma
+26,Julio Corona,100,UltraRare,Basic,Julio_Sigma
+27,Keeper Bering,100,Rare,Basic,Keeper_Rotisserie
+28,Keeper Bering,100,Common,Basic,Keeper_Shocked
+29,Keeper Bering,100,UltraRare,Basic,Keeper_Sigma
+30,Keeper Bering,100,Rare,Basic,KeeperJames_Old
+31,Levi Spevakow,100,UltraRare,Basic,Levi_Sigma
+32,Luca Morote,100,Common,Basic,Luca_Feet
+33,Luca Morote,100,UltraRare,Basic,Luca_Sigma
+34,Luca Morote,100,Rare,Basic,LucaFarnoud
+35,Matheus Fortunato,100,UltraRare,Basic,Matheus_Sigma
+36,Max Choi,100,CrownRare,Basic,Max
+37,Max Choi,100,Common,Basic,Max_GetCarried
+38,Max Choi,100,Common,Basic,Max_Post-Its
+39,Max Choi,100,UltraRare,Basic,Max_Sigma
+40,Woo Hyun Choi,100,CrownRare,Basic,Max_Sigma2
+41,Max Choi,100,Common,Basic,Max_TallerThanSpencer
+42,Mia Isabelle Delino,100,CrownRare,Basic,Mia
+43,Mia Delino,100,UltraRare,Basic,Mia_Sigma
+44,,100,Common,Basic,Nat
+45,Nicholas Chang,100,UltraRare,Basic,Nick_Sigma
+46,,100,Common,Basic,Pree_Meditate
+47,Preetham Mukundan,100,UltraRare,Basic,Pree_Sigma
+48,,100,Common,Basic,Pree_Spray
+49,,100,Rare,Basic,Quin_Jacob
+50,,100,Rare,Basic,Sang_Kirby
+51,Sang Jeon,100,UltraRare,Basic,Sang_Sigma
+52,,100,Rare,Basic,Space_Buns
+53,,100,Common,Basic,Spencer_Dice
+54,,100,CrownRare,Basic,Spencer_Gonk
+55,,100,CrownRare,Basic,Spencer_Soju
+56,,100,Rare,Basic,Spencer_Stitch
+57,,100,Rare,Basic,Spencer_Swim
+58,,100,Common,Basic,SpencerMax
+59,Stephanie Alexandra Phillips,100,CrownRare,Basic,Steph
+60,,100,UltraRare,Basic,Steph_Mario
+61,Steph Phillips,100,UltraRare,Basic,Steph_Sigma
+62,Steven's Coffees,100,CrownRare,Item,Steven_Coffee
+63,Team Project,100,UltraRare,Supporter,TeamProject_GroupPhoto
+64,Timothy de Jong,100,UltraRare,Basic,Tim_Sigma
+65,Xaviiour Laugo,100,UltraRare,Basic,Xav_Sigma

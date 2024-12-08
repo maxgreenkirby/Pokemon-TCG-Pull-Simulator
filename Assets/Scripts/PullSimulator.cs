@@ -242,15 +242,15 @@ public class PullSimulator : MonoBehaviour
 
     private void AlignPack()
     {
-        // Choose which way to rotate
-        // float eulerAngleY = _currentPack.transform.eulerAngles.y;
-        // float remainder = Mathf.Abs(eulerAngleY % 180);
+        // // Choose which way to rotate
+        // // float eulerAngleY = _currentPack.transform.eulerAngles.y;
+        // // float remainder = Mathf.Abs(eulerAngleY % 180);
 
-        // if (remainder > )
+        // // if (remainder > )
 
-        Tween.Rotation(_currentPack.transform, _packPrefab.transform.rotation, 0.75f, Ease.OutQuart).OnComplete(() => {
-            _currentPack = null;
-        });
+        // Tween.Rotation(_currentPack.transform, _packPrefab.transform.rotation, 0.75f, Ease.OutQuart).OnComplete(() => {
+        //     _currentPack = null;
+        // });
     }
 
     private void FindClosestPack()

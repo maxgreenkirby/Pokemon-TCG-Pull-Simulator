@@ -38,7 +38,7 @@ public class CVSConverter
                 existingCard.HP = int.Parse(values[2]);
                 existingCard.Rarity = (ERarity)Enum.Parse(typeof(ERarity), values[3]);
                 existingCard.EffectType = (EEffectType)Enum.Parse(typeof(EEffectType), values[4]);
-                existingCard.Sprite = AssetDatabase.LoadAssetAtPath<Sprite>($"Assets/Sprites/Card Sprites/{values[5]}.png");
+                existingCard.Sprite = AssetDatabase.LoadAssetAtPath<Sprite>($"Assets/Sprites/Card Sprites/VFS/{values[5]}.jpg");
 
                 EditorUtility.SetDirty(existingCard);
 
@@ -51,9 +51,9 @@ public class CVSConverter
             card.HP = int.Parse(values[2]);
             card.Rarity = (ERarity)Enum.Parse(typeof(ERarity), values[3]);
             card.EffectType = (EEffectType)Enum.Parse(typeof(EEffectType), values[4]);
-            card.Sprite = AssetDatabase.LoadAssetAtPath<Sprite>($"Assets/Sprites/Card Sprites/{values[5]}.png");
+            card.Sprite = AssetDatabase.LoadAssetAtPath<Sprite>($"Assets/Sprites/Card Sprites/VFS/{values[5]}.jpg");
 
-            AssetDatabase.CreateAsset(card, $"{directoryPath}{card.Name}.asset");
+            AssetDatabase.CreateAsset(card, $"{directoryPath}{card.ID}.asset");
         }
     }
 }
